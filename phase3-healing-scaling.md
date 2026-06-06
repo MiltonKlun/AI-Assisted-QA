@@ -454,9 +454,26 @@ Para soporte de múltiples runs sin overwrite.
 - [ ] Si la app under test tiene production data en alguna instancia, **no apuntar el pipeline ahí**. Solo staging/dev con data sintética.
 
 **Definition of Done:**
-- [ ] Doc existe.
-- [ ] Audit pasó.
-- [ ] Constraints documentados y enforced.
+- [x] Doc existe. (`docs/security-and-data-safety.md` — secrets-in-prompts,
+      test-data policy (synthetic only), target-environment rule (never
+      production data), trace/screenshot redaction, LLM prompt limits.
+      Cross-references `docs/secrets-management.md` rather than duplicating it.)
+- [x] Audit pasó. (§6: audited every `agents/*.md` + `scripts/*.js` for
+      credential exposure — clean. Tokens read from env and used only in
+      `Authorization` headers; all `console.*` reference env-var NAMES, never
+      values; no secret value is ever logged. Verified by grep over all
+      credential identifiers + inspection of every adjacent log site.)
+- [x] Constraints documentados y enforced. (Hard stop: never point the pipeline
+      at a production-data instance — §3. Playwright capture is conditional
+      (`trace: on-first-retry`, `screenshot: only-on-failure`) and artifacts are
+      gitignored; redaction guidance in §4. Standing rule for new code in §6.)
+
+> **Honest scope:** the audit is a point-in-time pass over the current scripts
+> and prompts (all clean) plus a standing rule to re-run it when credential-
+> touching code is added. Enforcement is by convention + the gitignore + the
+> conservative Playwright config, not a runtime scrubber — consistent with the
+> project's no-extra-machinery stance. The one known residual (Newman results
+> capturing a live header) is tracked in secrets-management §5 / ambiguities A5.
 
 ---
 
