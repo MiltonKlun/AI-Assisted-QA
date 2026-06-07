@@ -628,9 +628,22 @@ Soporte para múltiples stories en paralelo, **sin** autonomía de batch.
 - [ ] Si 3+ criteria justifican adopción, integrar como capa adicional (no reemplazar Playwright).
 
 **Definition of Done:**
-- [ ] Evaluación realizada.
-- [ ] Decisión documentada (adoptar / deferir / rechazar).
-- [ ] Si se adopta: integración como reporting layer adicional, sin reemplazar core.
+- [x] Evaluación realizada. (`docs/dual-judge-evaluation.md` — the 4 criteria
+      scored against current evidence: 0/4 justify adoption (bar is 3+), and the
+      10-run precondition is unmet (5 runs exist).)
+- [x] Decisión documentada (adoptar / deferir / rechazar). (**DEFER**, not
+      reject — the existing classifier's `unknown_needs_human_review` escalation
+      already approximates the "semantic doubt → human" path more cheaply, and a
+      YAML test DSL would conflict with reuse-first (§3.9) + Playwright-Native
+      (§4). Explicit re-evaluation trigger recorded.)
+- [x] Si se adopta: integración como reporting layer adicional, sin reemplazar
+      core. (Documented as the adoption shape IF re-opened: a second opinion
+      feeding the Failure Classifier, never replacing Playwright/Newman or the
+      `failure-analysis.json` contract.)
+
+> **Scope:** doc-only decision, faithful to the plan's "evaluate after 10+ runs"
+> guard — at 5 runs the honest output is a deferral with a trigger, not a forced
+> adoption.
 
 ---
 
