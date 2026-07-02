@@ -15,7 +15,10 @@ repeatability, traceability, and a guarantee that tests were written against
 the running app, not invented from text.** Whether that trade is worth it is
 not asserted here — it is _measured_ (`docs/evidence.md`, the
 pipeline-vs-raw benchmark). Until that run series lands, the project says so
-plainly rather than overclaiming.
+plainly rather than overclaiming. Note the emphasis: a capable agent given app
+access may ground itself, so grounding matters most against text-only
+prompting — the pipeline's durable edge is governance (gates, traceability, the
+audit trail), which no agent supplies for itself (`docs/evidence.md` §5b).
 
 ## The answer the system gives
 
@@ -36,7 +39,7 @@ limits** (`docs/when-to-use.md`):
 
 These never bend, in any phase (`CLAUDE.md` §3):
 
-1. **Four human gates; Gate 4 is permanently human.** No flag, no CI job, no
+1. **Four human gates; Gate 4 is always a human decision.** No flag, no CI job, no
    agent can pass a gate — the runner refuses non-TTY approval by construction.
 2. **Traceability:** STORY → RISK → TC → SPEC/API → PW/REQ → FAIL → BUG. No
    faked links; an unresolvable one is recorded as such.
